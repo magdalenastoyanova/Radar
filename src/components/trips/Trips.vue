@@ -31,30 +31,20 @@
       </article>
     </header>
     <body>
-      <div class="wrapper" v-for="trip in trips" v-bind:key="trip.id">
-        <div class="prev"></div>
-        <article class="container">
+      <div class="wrapper">
+          <div class="prev"></div>
+        <article class="container"  v-for="trip in trips" v-bind:key="trip.id">
           <article class="profile">
-            <img
-              src="https://media.istockphoto.com/photos/businesswoman-portrait-on-white-picture-id615279718?k=6&m=615279718&s=612x612&w=0&h=ozD8oKRFXmyyXoAcDuo09WSkmtLSYYlOBuCCNrMyW2Y="
-              alt=""
-            />
+            <img v-bind:src="trip.imageUrl"/>
             <p>{{ trip.name }}</p>
           </article>
-          <article class="info">
-            <button id="recomended">Recommend</button>
-            <section class="recommend">
-              <span id="recCount">26</span>
-              <span id="rec"> Recommend</span>
-            </section>
-          </article>
-
+          <article class="info"> </article>
           <section class="mainInfo">
             <article class="destination">
+              <p id="destination"><em>Destination:</em></p>
               <p id="destination">{{ trip.cityFrom }} - {{ trip.cityTo }}</p>
             </article>
             <router-link v-bind:to="{name:'detailsTrip', params: {name: trip.name}}"><button id="join">Details</button></router-link>
-            
           </section>
         </article>
         <div class="next"></div>
@@ -79,6 +69,7 @@ export default {
           const data = {
             id: doc.id,
             name: doc.data().name,
+            imageUrl: doc.data().imageUrl,
             cityTo: doc.data().cityTo,
             cityFrom: doc.data().cityFrom,
             carModel: doc.data().carModel,

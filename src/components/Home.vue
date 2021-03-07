@@ -1,18 +1,19 @@
 <template>
   <body>
     <section class="content">
-      <article class="background-img">
-  <v-img src= "./assets/images/illustration.png"></v-img>
-      </article>
+      <article
+        class="background-img"  ></article>
       <article class="content-inside">
         <section class="text">
           <h2>Share a Journey</h2>
           <p>The Ultimate Platform for Shared travel</p>
-          <br>
+          <br />
           <p>expenses &amp; Great company</p>
         </section>
         <section class="btn">
-         <router-link to="/signup"><button><a href="#">Join Now</a></button></router-link> 
+          <router-link to="/signup"
+            ><button><a href="#">Join Now</a></button></router-link
+          >
         </section>
         <article class="benefits">
           <p>Never Travel Alone again</p>
@@ -27,8 +28,7 @@
 <script>
 export default {
   name: "Home",
-
-};
+}
 </script>
 <style scoped>
 .background-img img {

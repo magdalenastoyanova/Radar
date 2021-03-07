@@ -4,22 +4,16 @@
     <h1><em>Details Page</em></h1>
     <article class="container">
       <article class="profile-img">
-        <img
-          src="https://media.istockphoto.com/photos/businesswoman-portrait-on-white-picture-id615279718?k=6&m=615279718&s=612x612&w=0&h=ozD8oKRFXmyyXoAcDuo09WSkmtLSYYlOBuCCNrMyW2Y="
-        />
+        <img  :src="imageUrl" :alt="name"/>
       </article>
       <article class="content">
         <p class="dark" id="name">{{ name }}</p>
         <article class="info">
-          <section class="recommend">
-            <span class="dark"> Recommend</span>
-            <span id="recCount">26</span>
-          </section>
-        </article>
         <article class="destination">
           <p class="dark">Destination:</p>
           <p class="light">{{ cityFrom }} - {{ cityTo }}</p>
         </article>
+         </article>
         <article class="date">
           <p class="dark">Date & Time:</p>
           <p class="light">{{ date }}, {{ time }}h</p>
@@ -31,13 +25,13 @@
         <article class="additionalinfo">
           <p class="dark" id="additionalinfo">Additional information:</p>
           <ul>
-            <li>{{ seats }} Seats taken</li>
+            <li>{{ seats }} seats </li>
             <li>{{ carModel }}</li>
             <li>{{ phoneNumber }}</li>
           </ul>
         </article>
         <article class="buttons">
-          <router-link to="/"><button id="edit">Edit</button></router-link>
+          <router-link v-bind:to="{name: 'edit', params: {name: name}}"><button id="edit"> Edit</button></router-link>
           <button @click="deleteTrip" id="delete">Delete</button>
         </article>
       </article>
@@ -52,6 +46,7 @@ export default {
   data() {
     return {
       name: null,
+      imageUrl:null,
       cityFrom: null,
       cityTo: null,
       carModel: null,
@@ -59,18 +54,19 @@ export default {
       time: null,
       phoneNumber: null,
       price: null,
-      seats: null,
-    };
+      seats: null
+    }
   },
   beforeRouteEnter(to, from, next) {
     db.collection("trips")
       .where("name", "==", to.params.name)
       .get()
       .then((querySnapShot) => {
-        querySnapShot.forEach((doc) => {
+        querySnapShot.forEach(doc => {
           next(vm => {
               vm.name = doc.data().name,
-              vm.cityFrom = doc.data().ctyFrom,
+              vm.imageUrl = doc.data().imageUrl,
+              vm.cityFrom = doc.data().cityFrom,
               vm.cityTo = doc.data().cityTo,
               vm.carModel = doc.data().carModel,
               vm.date = doc.data().date,
@@ -78,9 +74,9 @@ export default {
               vm.phoneNumber = doc.data().phoneNumber,
               vm.price = doc.data().price,
               vm.seats = doc.data().seats
-          });
-        });
-      });
+          })
+        })
+      })
   },
   watch: {
     $route: "fetchData",
@@ -91,9 +87,10 @@ export default {
         .where("name", "==", this.$route.params.name)
         .get()
         .then(querySnapShot => {
-          querySnapShot.forEach((doc) => {
+          querySnapShot.forEach(doc => {
             this.id = doc.id,
             this.name = doc.data().name
+            this.imageUrl = doc.data().imageUrl
             this.cityFrom = doc.data().cityFrom
             this.cityTo = doc.data().cityTo
             this.carModel = doc.data().carModel
@@ -150,6 +147,7 @@ h1 {
   width: 300px;
 }
 .content {
+  text-align: center;
   margin-left: 2rem;
   color: #525f7f;
   font-family: "Helvetica", sans-serif;
@@ -192,8 +190,13 @@ h1 {
   border: 2px solid #5e72e4;
   border-radius: 6px;
   color: #5e72e4;
-  padding: 3px 20px;
+  padding: 3px 25px;
   margin-right: 5px;
+}
+#edit:hover{
+  cursor: pointer;
+  background-color: #5e72e4;
+  color: white;
 }
 #delete {
   background-color: #5e72e4;
@@ -202,5 +205,10 @@ h1 {
   border: none;
   padding: 5px 20px;
   margin-left: 5px;
+}
+#delete:hover{
+  cursor: pointer;
+  background: white;
+  color: #5e72e4;
 }
 </style>

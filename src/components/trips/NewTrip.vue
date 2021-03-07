@@ -2,15 +2,19 @@
   <form @submit.prevent="saveTrip">
     <h1>Add New Trip</h1>
     <article class="fields">
+       <label for="name"> Name</label>
+      <input type="text" v-model="name" required placeholder="Your Name" />
+       <label for="imageUrl">Your Photo</label>
+      <input type="text" v-model="imageUrl" required placeholder="http://..." />
       <label for="cityFrom">You Travel from(City)</label>
       <input type="text" v-model="cityFrom" required placeholder="City" />
       <label for="cityTo">You Travel from(City)</label>
       <input type="text" v-model="cityTo" placeholder="City" required />
       <article class="dateTime">
         <section class="date">
-          <label for="date">Date</label>
+          <label>Date</label>
           <input
-            type="date"
+            type="text"
             id="date"
             v-model="date"
             placeholder="Pick a date"
@@ -18,9 +22,9 @@
           />
         </section>
         <section class="time">
-          <label for="time">Time</label>
+          <label>Time</label>
           <input
-            type="time"
+            type="text"
             id="time"
             v-model="time"
             placeholder="10:30"
@@ -28,11 +32,10 @@
           />
         </section>
       </article>
-
       <label for="seats">Seats Available</label>
       <input type="text" v-model="seats" placeholder="3" required />
-      <label for="lvPerPerson">Leva Per Person</label>
-      <input type="text" v-model="lvPerPerson" placeholder="20 leva" required />
+      <label>Leva Per Person</label>
+      <input type="text" v-model="price" placeholder="20 leva" required />
       <label for="carModel">Car Model</label>
       <input type="text" v-model="carModel" placeholder="Mazda 3" required />
       <label for="phoneNumber">Phone Number</label>
@@ -44,10 +47,8 @@
       />
     </article>
     <article class="buttons">
-      <router-link to="/"
-        ><button class="cancel"><a href="/">Cancel</a></button></router-link
-      >
-      <button type="submit" id="create"><a href="/">Create</a></button>
+      <router-link to="/"><button class="cancel"><a>Cancel</a></button></router-link>
+      <button type="submit" id="create"><a>Create</a></button>
     </article>
   </form>
 </template>
@@ -59,6 +60,7 @@ export default {
   data() {
     return {
       name: null,
+      imageUrl: null,
       cityTo: null,
       cityFrom: null,
       carModel: null,
@@ -67,12 +69,13 @@ export default {
       phoneNumber: null,
       price: null,
       seats: null,
-    };
+    }
   },
   methods: {
     saveTrip() {
       db.collection("trips").add({
-        name: this.name,
+        name:this.name,
+        imageUrl: this.imageUrl,
         cityTo: this.cityTo,
         cityFrom: this.cityFrom,
         carModel: this.carModel,
@@ -81,8 +84,9 @@ export default {
         phoneNumber: this.phoneNumber,
         price: this.price,
         seats: this.seats,
+
       })
-      .then(docRef => this.$router.push('/'))
+      .then(docRef => this.$router.push('trips'))
       .catch(error => console.log(err))
     },
   },
@@ -142,7 +146,7 @@ h1 {
   margin-left: 4rem;
 }
 .time input {
-  width: 127%;
+  width: 82%;
 }
 .buttons {
   display: inline-block;
