@@ -1,58 +1,106 @@
 <template>
-   <section id="register">
-      <div class="color">
-        <div class="register-form">
-          <h1>Register</h1>
-          <form action="/signup" method="POST" id="form">
-            <article class="fields">
-              <article class="icon">
-               <i class="fas fa-user"></i>
-            <input type="text" v-model="email" placeholder=' Name' />
+  <section id="register">
+    <div class="color">
+      <div class="register-form">
+        <h1>Register</h1>
+        <form @submit.prevent="register" id="form">
+          <article class="fields">
+            <article class="icon">
+              <i class="fas fa-user"></i>
+              <input type="text" v-model="email" @blur="$v.email.$touch" placeholder=" Email" />
             </article>
-             <article class="icon">
-               <i class="fas fa-lock"></i>
-            <input type="password"  v-model="password" placeholder=" Password" />
-             </article>
-             <article class="icon">
-             <i class="fas fa-unlock"></i>
-            <input type="password" v-model="rePassword" placeholder=" Repeat Password"/>
-             </article>
+             <template v-if="$v.email.$error">
+                <p v-if="!$v.email.required" class="error">Email is required!</p>
+                <p v-if="!$v.email.email" class="error">Invalid email!</p>
+              </template>
+
+            <article class="icon">
+              <i class="fas fa-lock"></i>
+              <input
+                type="password"
+                v-model="password"
+                @blur="$v.password.$touch"
+                placeholder=" Password"
+              />
             </article>
+
+    <template v-if="$v.password.$error">
+        <p v-if="!$v.password.required" class="error">Password is required!</p>
+        <p v-else-if="!$v.password.minLength" class="error">Password should be atleast 3 symbols!</p>
+        <p v-else-if="!$v.password.maxLength" class="error">Password should be no more than 10 symbols!</p>
+    </template>
+
+            <article class="icon">
+              <i class="fas fa-unlock"></i>
+              <input
+                type="password"
+                v-model="rePassword"
+                 @blur="$v.rePassword.$touch"
+                placeholder=" Repeat Password"
+              />
+            </article>
+
+             <template v-if="$v.rePassword.$error">
+               <p v-if="!$v.password.sameAs" class="error">Passwords do not match!</p>
+             </template>
+
+          </article>
           <button v-on:click="register">Create account</button>
-          </form>
-        </div>
+        </form>
       </div>
-    </section>
+    </div>
+  </section>
 </template>
 <script>
-import firebase from 'firebase'
+
+import firebase from "firebase";
+import { validationMixin } from "vuelidate";
+import { required, email, minLength, sameAs, maxLength } from "vuelidate/lib/validators";
 export default {
-    name: 'register',
-    data: function() {
-      return {
-        email: '',
-        password:'',
-        rePassword: ''
-      }
+  name: "register",
+  data: function () {
+    return {
+      email: "",
+      password: "",
+      rePassword: "",
+    };
+  },
+  mixins: [validationMixin],
+  validations: {
+    email: {
+      required,
+      email,
+      sameAs
     },
-    methods: {
-      register: function(e) {
-       firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-       .then(user => {
-         alert(`Account created for ${user.email}`)
-         this.$router.go({path: this.$router.path});
-       },
-       err => {
-         alert(err.message)
-       })
-       e.preventDefault();
-      }
+    password: {
+      required,
+      minLength: minLength(6),
+      maxLength: maxLength(11),
+    },
+      rePassword: {
+      sameAs: sameAs("password")
     }
-}
+  },
+  methods: {
+    register: function (e) {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then(
+          (user) => {
+            alert(`Account created for ${user.email}`);
+            this.$router.go({ path: this.$router.path });
+          },
+          (err) => {
+            alert(err.message);
+          }
+        );
+    },
+  },
+};
 </script>
 
 <style scoped>
-
 #register {
   margin: 0;
   padding: 0;
@@ -60,7 +108,7 @@ export default {
   box-sizing: border-box;
 }
 .register-form {
-    background-color: rgb(247, 250, 252);
+  background-color: rgb(247, 250, 252);
   max-width: 550px;
   margin: 4rem auto;
   display: flex;
@@ -70,15 +118,15 @@ export default {
   box-sizing: border-box;
   border-radius: 7px;
 }
-.icon{
+.icon {
   display: flex;
   flex-direction: row;
 }
 #form > article > article:nth-child(3) > svg,
 #form > article > article:nth-child(2) > svg,
-#form > article > article:nth-child(1) > svg{
+#form > article > article:nth-child(1) > svg {
   margin-top: 1rem;
-  color: #8898AA;
+  color: #8898aa;
 }
 
 h1 {
@@ -125,5 +173,14 @@ button {
   padding: 10px 20px;
   margin: 30px 121px;
 }
+p.error {
+  text-align: left;
+  background-color: #f8d7da;
+  padding: 8px;
+  border-radius: 3px;
+}
 
+input.error {
+  border-left-color: #a8413f;
+}
 </style>

@@ -15,7 +15,8 @@
     "@fortawesome/vue-fontawesome": "^2.0.2",
     "firebase": "^8.2.10",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuelidate": "^0.7.6"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

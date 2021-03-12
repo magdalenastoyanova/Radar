@@ -56,8 +56,11 @@
 <script>
 import firebase from 'firebase';
 import db from "../firebaseInit";
+
+
 export default {
   name: "create",
+  mixins: [validationMixin],
   data() {
     return {
       name: null,
@@ -193,5 +196,15 @@ button a {
 }
 .cancel a:hover {
   color: #ffffff;
+}
+p.error {
+  text-align: left;
+  background-color: #f8d7da;
+  padding: 8px;
+  border-radius: 3px;
+}
+
+input.error {
+  border-left-color: #a8413f;
 }
 </style>
