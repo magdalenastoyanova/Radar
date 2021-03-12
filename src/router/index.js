@@ -1,47 +1,107 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from '@/components/Home'
-import NewTrip from '@/components/trips/NewTrip'
-import TripDetails from '@/components/trips/TripDetails'
-import TripEdit from '@/components/trips/TripEdit'
-import SignIn from '@/components/user/SignIn'
-import SignUp from '@/components/user/SignUp'
-import Trips from '@/components/trips/Trips'
+import Vue from "vue";
+import Router from "vue-router";
+import Home from "@/components/Home";
+import NewTrip from "@/components/trips/NewTrip";
+import TripDetails from "@/components/trips/TripDetails";
+import TripEdit from "@/components/trips/TripEdit";
+import SignIn from "@/components/user/SignIn";
+import SignUp from "@/components/user/SignUp";
+import Trips from "@/components/trips/Trips";
+import NotFound from '@/components/common/NotFound';
+import firebase from 'firebase';
 
-Vue.use(Router)
-
-export default new Router({
+Vue.use(Router);
+let router = new Router({
+  mode: 'history',
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home
+      path: "/",
+      name: "home",
+      component: Home,
+    },
+
+    {
+      path: "/login",
+      name: "login",
+      component: SignIn,
+      meta: {
+        requiresGuest: true
+      }
     },
     {
-      path: '/trips',
-      name: 'trips',
-      component: Trips
+      path: "/register",
+      name: "register",
+      component: SignUp,
+      meta: {
+        requiresGuest: true
+      }
     },
     {
-      path: '/create',
-      name: 'create',
-      component: NewTrip
-    },   {
-      path: '/details/:name',
-      name: 'detailsTrip',
-      component: TripDetails
-    },   {
-      path: '/edit/:id',
-      name: 'edit',
-      component: TripEdit
-    },   {
-      path: '/signin',
-      name: 'signin',
-      component: SignIn
-    },   {
-      path: '/signup',
-      name: 'signup',
-      component: SignUp
+      path: "/trips",
+      name: "trips",
+      component: Trips,
+      meta: {
+        requiresAuth: true
+      }
     },
+    {
+      path: "/create",
+      name: "create",
+      component: NewTrip,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/details/:name",
+      name: "detailsTrip",
+      component: TripDetails,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/edit/:name",
+      name: "edit",
+      component: TripEdit,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '*',
+      name: 'notFound',
+      component: NotFound
+  },
   ]
+});
+
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)){
+    if(!firebase.auth().currentUser){
+      next({
+        path: '/login',
+        query: {
+          redirect: to.fullPath
+        }
+      });
+    }else {
+      next();
+    }
+  } else if(to.matched.some(record => record.meta.requiresGuest)){
+    if(firebase.auth().currentUser){
+      next({
+        path: '/trips',
+        query: {
+          redirect: to.fullPath
+        }
+      });
+    }else {
+      next();
+    }
+  } else{
+    next();
+  }
 })
+
+export default router;

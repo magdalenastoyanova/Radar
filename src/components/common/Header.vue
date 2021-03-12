@@ -6,19 +6,42 @@
       </article>
       <nav>
         <ul class="navigation">
-          <li><router-link to="/signin">Login</router-link></li>
-          <li><router-link to="/signup">Register</router-link></li>
-          <li><router-link to="/myTravels">My Travels</router-link></li>
-          <li><router-link to="/create">Add Trip</router-link></li>
-          <li><router-link to="/logout">Logout</router-link></li>
+          <li v-if="isLoggedIn"> <span>{{currentUser}}</span></li>
+          <li><router-link to="/login" v-if="!isLoggedIn">Login</router-link></li>
+          <li><router-link to="/register" v-if="!isLoggedIn">Register</router-link></li>
+          <li><router-link to="/trips" v-if="isLoggedIn">Travels</router-link></li>
+          <li><router-link to="/create" v-if="isLoggedIn">Add Trip</router-link></li>
+          <li> <a @click="logout" class="nav-link" v-if="isLoggedIn">Logout</a></li>
         </ul>
       </nav>
     </article>
   </header>
 </template>
+
+
 <script>
+import firebase from 'firebase'
 export default {
      name: "Header",
+     data() {
+       return {
+         isLoggedIn: false,
+         currentUser: false
+       }
+     },
+     created() {
+    if(firebase.auth().currentUser){
+      this.isLoggedIn = true;
+      this.currentUser= firebase.auth().currentUser.email;
+    }
+     },
+     methods: {
+       logout: function() {
+         firebase.auth().signOut().then(() => {
+           this.$router.go({path: this.$router.path});
+         })
+       }
+     }
 }
 </script>
 <style scoped>
@@ -37,13 +60,16 @@ export default {
   float: right;
   margin: 0;
 }
-.navigation li a {
+.navigation li a, .navigation span {
   color: #172b4d;
   text-align: center;
   text-decoration: none;
   font: bold 13px Helvetica, sans-serif;
   line-height: 1.2;
   padding: 0 1rem;
+}
+.nav-link{
+  cursor: pointer;
 }
 .navigation li {
   display: inline-block;

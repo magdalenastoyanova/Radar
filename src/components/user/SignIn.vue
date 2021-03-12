@@ -3,17 +3,16 @@
         <div class="color">
           <div class="login-form">
             <h1>Login</h1>
-            <form action="/signin" method="POST" id="form">
+            <form >
                 <article class="fields">
-                    <label for="email"></label>
-                    <input type="text"   name="username" placeholder='#xf2bb  Name' />
-                    <label for="password"></label>
-                    <input type="password"  name="password" placeholder="#xf502  Password" />
+                    <article class="icon">
+                      <i class="fas fa-user"></i>
+                  <input id="input" type="text" v-model="email" placeholder='   Name' /></article>
+                    <article class="icon">
+                      <i class="fas fa-lock"></i>
+                    <input id="input" type="password" v-model="password" placeholder="  Password" /></article>
               </article>
-              <article class="check">
-              <input  type="checkbox" name="checkbox" value="check" id="agree"/><span> Remember me</span>
-            </article>
-           <router-link to="/"><button>Create account</button></router-link> 
+           <button v-on:click="login">Sign In</button>
             </form>
           </div>
         </div>
@@ -22,19 +21,52 @@
 
 
 <script>
+import firebase from 'firebase'
 export default {
-    name: 'Login',
-}
+    name: 'login',
+    data: function() {
+      return {
+        email: '',
+        password:''
+      }
+    },
+    methods: {
+      login: function(e) {
+       firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+       .then(user => {
+         alert(`You are logged as ${email}`)
+         this.$router.go({path: this.$router.path});
+       },
+       err => {
+         alert(err.message)
+       })
+     e.preventDefault();
+      }
+    }
+  }
 </script>
 
 <style scoped>
+.login-form {
+    background-color: rgb(247, 250, 252);
+  max-width: 550px;
+  margin: 4rem auto;
+  display: flex;
+  flex-direction: column;
+  padding: auto;
+  box-shadow: -1px 1px 34px 0px rgba(0, 0, 0, 0.75);
+  box-sizing: border-box;
+  border-radius: 7px;
+}
+
+
 #login{
     margin: 0;
   padding: 0;
   font-family: Helvetica, sans-serif;
-  background-color: rgb(247, 250, 252);
   box-sizing: border-box;
 }
+
 h1 {
     display: block;
     font-family: Helvetica, sans-serif;
@@ -60,15 +92,15 @@ h1 {
     box-shadow: 0px 1px 3px #32325d26;
     border-radius: 4px;
   }
-  .check span {
-    font-size: 12px;
-    color: #8898aa;
+  #login > div > div > form > article.fields > article:nth-child(1) > svg{
+    margin-left: 6rem;
+    color: #8898AA;
+  } 
+  #login > div > div > form > article.fields > article:nth-child(2) > svg{
+    margin-left: 6rem;
+    color: #8898AA;
   }
-  .check {
-    text-align: left;
-    margin-top: 6px;
-    margin-left: 10px;
-  }
+
   button {
     font-family: Helvetica, sans-serif;
     background-color: #5e72e4;
@@ -79,5 +111,6 @@ h1 {
     font-size: 10px;
     padding: 10px 20px;
     margin: 30px 121px;
+    margin-left: 15rem;
   }
 </style>

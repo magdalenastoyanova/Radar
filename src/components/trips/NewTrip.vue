@@ -54,6 +54,7 @@
 </template>
 
 <script>
+import firebase from 'firebase';
 import db from "../firebaseInit";
 export default {
   name: "create",
@@ -69,6 +70,7 @@ export default {
       phoneNumber: null,
       price: null,
       seats: null,
+      creator: null
     }
   },
   methods: {
@@ -84,6 +86,7 @@ export default {
         phoneNumber: this.phoneNumber,
         price: this.price,
         seats: this.seats,
+        creator: firebase.auth().currentUser.uid
 
       })
       .then(docRef => this.$router.push('trips'))

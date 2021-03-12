@@ -15,12 +15,12 @@
         </article>
          </article>
         <article class="date">
-          <p class="dark">Date & Time:</p>
+          <p class="dark">Date &amp; Time:</p>
           <p class="light">{{ date }}, {{ time }}h</p>
         </article>
         <article class="price">
           <p class="dark">Price:</p>
-          <p class="light">{{ price }} lv per person</p>
+          <p class="light">{{ price }} per person</p>
         </article>
         <article class="additionalinfo">
           <p class="dark" id="additionalinfo">Additional information:</p>
@@ -31,8 +31,15 @@
           </ul>
         </article>
         <article class="buttons">
+          <template v-if="isCreator">
           <router-link v-bind:to="{name: 'edit', params: {name: name}}"><button id="edit"> Edit</button></router-link>
           <button @click="deleteTrip" id="delete">Delete</button>
+          </template>
+          <template v-else>
+              <router-link to=""><button id="edit"> Join</button></router-link>
+            
+              <router-link to="/"><button id="delete"><a>Cancel</a></button></router-link>
+          </template>
         </article>
       </article>
     </article>
@@ -40,6 +47,7 @@
 </template>
 
 <script>
+import firebase from 'firebase';
 import db from "../firebaseInit";
 export default {
   name: "detailsTrip",
@@ -54,7 +62,8 @@ export default {
       time: null,
       phoneNumber: null,
       price: null,
-      seats: null
+      seats: null,
+      creator: null
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -74,6 +83,7 @@ export default {
               vm.phoneNumber = doc.data().phoneNumber,
               vm.price = doc.data().price,
               vm.seats = doc.data().seats
+              vm.creator = doc.data().creator
           })
         })
       })
@@ -99,6 +109,7 @@ export default {
             this.phoneNumber = doc.data().phoneNumber
             this.price = doc.data().price
             this.seats = doc.data().seats
+            this.creator = doc.data().creator
           })
         })
     },
@@ -111,12 +122,22 @@ export default {
             querySnapShot.forEach((doc) => {
               doc.ref.delete();
               this.$router.push("/");
-            });
-          });
+            })
+          })
+        }
       }
-    },
   },
-};
+  computed: {
+       isCreator() {
+      let userId = firebase.auth().currentUser.uid;
+      if (userId == this.creator) {
+        return true;  
+      } else{
+        return false;
+      }
+    }
+  }
+}
 </script>
 
 <style scoped>

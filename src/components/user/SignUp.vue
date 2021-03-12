@@ -5,38 +5,82 @@
           <h1>Register</h1>
           <form action="/signup" method="POST" id="form">
             <article class="fields">
-            <label for="email"></label>
-            <input type="text"   name="username" placeholder='#xf2bb  Name' />
-            <label for="password"></label>
-            <input type="password"  name="password" placeholder="#xf502  Password" />
-            <label for="repeat-password"></label>
-            <input type="password" name="rePassword" placeholder="#xf13e  Repeat Password"/>
+              <article class="icon">
+               <i class="fas fa-user"></i>
+            <input type="text" v-model="email" placeholder=' Name' />
             </article>
-            <article class="check">
-            <input type="checkbox" name="checkbox" value="check" id="agree"> <span>I agree with the Terms and Conditions</span>
-            <br>
-            <input type="checkbox" name="checkbox" value="check" id="agree"><span> I agree with the Privacy Policy</span>
+             <article class="icon">
+               <i class="fas fa-lock"></i>
+            <input type="password"  v-model="password" placeholder=" Password" />
+             </article>
+             <article class="icon">
+             <i class="fas fa-unlock"></i>
+            <input type="password" v-model="rePassword" placeholder=" Repeat Password"/>
+             </article>
             </article>
-          <router-link to="/"><button>Create account</button></router-link>  
+          <button v-on:click="register">Create account</button>
           </form>
         </div>
       </div>
     </section>
 </template>
 <script>
+import firebase from 'firebase'
 export default {
-    name: 'signup',
+    name: 'register',
+    data: function() {
+      return {
+        email: '',
+        password:'',
+        rePassword: ''
+      }
+    },
+    methods: {
+      register: function(e) {
+       firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+       .then(user => {
+         alert(`Account created for ${user.email}`)
+         this.$router.go({path: this.$router.path});
+       },
+       err => {
+         alert(err.message)
+       })
+       e.preventDefault();
+      }
+    }
 }
 </script>
 
 <style scoped>
+
 #register {
   margin: 0;
   padding: 0;
   font-family: Helvetica, sans-serif;
-  background-color: rgb(247, 250, 252);
   box-sizing: border-box;
 }
+.register-form {
+    background-color: rgb(247, 250, 252);
+  max-width: 550px;
+  margin: 4rem auto;
+  display: flex;
+  flex-direction: column;
+  padding: auto;
+  box-shadow: -1px 1px 34px 0px rgba(0, 0, 0, 0.75);
+  box-sizing: border-box;
+  border-radius: 7px;
+}
+.icon{
+  display: flex;
+  flex-direction: row;
+}
+#form > article > article:nth-child(3) > svg,
+#form > article > article:nth-child(2) > svg,
+#form > article > article:nth-child(1) > svg{
+  margin-top: 1rem;
+  color: #8898AA;
+}
+
 h1 {
   display: block;
   font-family: Helvetica, sans-serif;
