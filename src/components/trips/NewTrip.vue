@@ -60,7 +60,6 @@ import db from "../firebaseInit";
 
 export default {
   name: "create",
-  mixins: [validationMixin],
   data() {
     return {
       name: null,

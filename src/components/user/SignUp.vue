@@ -69,8 +69,7 @@ export default {
   validations: {
     email: {
       required,
-      email,
-      sameAs
+      email
     },
     password: {
       required,
