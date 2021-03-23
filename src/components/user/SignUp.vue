@@ -69,7 +69,8 @@ export default {
   validations: {
     email: {
       required,
-      email
+      email,
+      loading: false,
     },
     password: {
       required,
@@ -81,16 +82,18 @@ export default {
     }
   },
   methods: {
-    register: function (e) {
-      firebase
+    register: async function (e) {
+      this.loading = true;
+       await firebase
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(
           (user) => {
-            alert(`Account created for ${user.email}`);
+            this.loading = false;
             this.$router.go({ path: this.$router.path });
           },
           (err) => {
+            this.loading = false;
             alert(err.message);
           }
         );

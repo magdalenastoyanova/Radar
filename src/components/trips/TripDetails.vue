@@ -36,10 +36,10 @@
           <button @click="deleteTrip" id="delete">Delete</button>
           </template>
           <template v-else>
-              <router-link to=""><button id="edit"> Join</button></router-link>
-            
+              <router-link to=""><button @click="joinTrip"  id="edit"> Join</button></router-link>
               <router-link to="/"><button id="delete"><a>Cancel</a></button></router-link>
           </template>
+          
         </article>
       </article>
     </article>
@@ -125,6 +125,9 @@ export default {
             })
           })
         }
+      },
+      joinTrip() {
+      
       }
   },
   computed: {
@@ -137,7 +140,9 @@ export default {
       }
     }
   }
-}
+ }
+
+
 </script>
 
 <style scoped>

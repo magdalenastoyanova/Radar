@@ -37,8 +37,27 @@
 
           </article>
           <button v-on:click="login">Sign In</button>
+          
         </form>
-      </div>
+      <div class="row">
+					<div class="container" v-if="loading">
+						<div class="row">
+							<div id="loader">
+								<div class="dot"></div>
+								<div class="dot"></div>
+								<div class="dot"></div>
+								<div class="dot"></div>
+								<div class="dot"></div>
+								<div class="dot"></div>
+								<div class="dot"></div>
+								<div class="dot"></div>
+								<div class="loading"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm"></div>
     </div>
   </section>
 </template>
@@ -55,6 +74,7 @@ export default {
     return {
       email: "",
       password: "",
+      loading: false
     };
   },
   validations: {
@@ -68,15 +88,18 @@ export default {
     },
   },
   methods: {
-    login: function (e) {
-      firebase
+    login: async function (e) {
+      this.loading = true;
+    await firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(
           (user) => {
+            this.loading = false;
             this.$router.go({ path: this.$router.path });
           },
           (err) => {
+            this.loading = false;
             alert(err.message);
           }
         );

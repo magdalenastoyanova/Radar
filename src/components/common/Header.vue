@@ -6,7 +6,7 @@
       </article>
       <nav>
         <ul class="navigation">
-          <li v-if="isLoggedIn"> <span>{{currentUser}}</span></li>
+          <li><router-link to="/profile" v-if="isLoggedIn"><span>{{currentUser}}</span></router-link></li>
           <li><router-link to="/login" v-if="!isLoggedIn">Login</router-link></li>
           <li><router-link to="/register" v-if="!isLoggedIn">Register</router-link></li>
           <li><router-link to="/trips" v-if="isLoggedIn">Travels</router-link></li>

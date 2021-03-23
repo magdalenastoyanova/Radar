@@ -2,7 +2,7 @@
   <div class="html">
     <body>
       <article class="tripsList">
-        <section class="container"  v-for="trip in trips" v-bind:key="trip.id">
+        <section class="container" v-for="trip in trips" v-bind:key="trip.id">
           <section class="trip">
             <section class="mainInfo">
           <article class="profile">
@@ -19,6 +19,26 @@
         </section>
       </article>
     </body>
+    <div class="row justify-content-center">
+			<div class="col-8 m-5 justify-content-center d-flex ">
+				<div class="container mt-5" v-if="loading">
+					<div class="row">
+						<div id="loader">
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="loading"></div>
+						</div>
+					</div>
+				</div>
+         </div>
+          </div>
+ 
   </div>
 </template>
 
@@ -27,12 +47,14 @@ import db from "../firebaseInit";
 export default {
   name: "trips",
   data() {
-    return { trips: [] };
+  return  { trips: []};
   },
-  created() {
-    db.collection("trips")
+ async created() {
+   this.loading = true;
+  await  db.collection("trips")
       .get()
       .then((querySnapshot) => {
+        this.loading = false;
         querySnapshot.forEach((doc) => {
           const data = {
             id: doc.id,
@@ -50,7 +72,10 @@ export default {
           };
           this.trips.push(data);
         });
-      });
+      }). catch((error) => {
+        console.log(error);
+        this.loading = false;
+      })
   },
 };
 </script>

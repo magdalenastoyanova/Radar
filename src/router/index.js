@@ -1,13 +1,15 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "@/components/Home";
-import NewTrip from "@/components/trips/NewTrip";
-import TripDetails from "@/components/trips/TripDetails";
-import TripEdit from "@/components/trips/TripEdit";
-import SignIn from "@/components/user/SignIn";
-import SignUp from "@/components/user/SignUp";
-import Trips from "@/components/trips/Trips";
-import NotFound from '@/components/common/NotFound';
+
+const NewTrip = () => import(/* webpackChunkName: "NewTrip" */ "@/components/trips/NewTrip");
+const TripDetails = () => import(/* webpackChunkName: "TripDetails" */ "@/components/trips/TripDetails");
+const TripEdit = () => import(/* webpackChunkName: "TripEdit" */ "@/components/trips/TripEdit");
+const SignIn = () => import(/* webpackChunkName: "SignIn" */ "@/components/user/SignIn");
+const SignUp = () => import(/* webpackChunkName: "SignUp" */ "@/components/user/SignUp");
+const Profile = () => import(/* webpackChunkName: "Profile" */ "@/components/user/Profile");
+const Trips = () => import(/* webpackChunkName: "Trips" */ "@/components/trips/Trips");
+const NotFound = () => import(/* webpackChunkName: "NotFound" */ '@/components/common/NotFound');
 import firebase from 'firebase';
 
 Vue.use(Router);
@@ -36,6 +38,16 @@ let router = new Router({
         requiresGuest: true
       }
     },
+
+    {
+      path: "/profile",
+      name: "profile",
+      component: Profile,
+      meta: {
+        requiresAuth: true
+      }
+    },
+
     {
       path: "/trips",
       name: "trips",

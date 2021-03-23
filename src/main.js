@@ -1,4 +1,3 @@
-
 import Vue from 'vue'
 import App from './App'
 import router from './router'
@@ -19,4 +18,4 @@ firebase.auth().onAuthStateChanged(user => {
   }
 })
 
-/* eslint-disable no-new */
+

@@ -48,7 +48,7 @@
     </article>
     <article class="buttons">
       <router-link to="/"><button class="cancel"><a>Cancel</a></button></router-link>
-      <button type="submit" id="create"><a>Create</a></button>
+      <button type="submit" id="create"   :disabled="disableButton"><a>Create</a></button>
     </article>
   </form>
 </template>
@@ -72,12 +72,15 @@ export default {
       phoneNumber: null,
       price: null,
       seats: null,
-      creator: null
+      creator: null,
+      loading: false,
+      disableButton: false,
     }
   },
   methods: {
-    saveTrip() {
-      db.collection("trips").add({
+    async saveTrip() {
+      	this.loading = true;
+        await db.collection("trips").add({
         name:this.name,
         imageUrl: this.imageUrl,
         cityTo: this.cityTo,
@@ -89,10 +92,10 @@ export default {
         price: this.price,
         seats: this.seats,
         creator: firebase.auth().currentUser.uid
-
-      })
-      .then(docRef => this.$router.push('trips'))
-      .catch(error => console.log(err))
+      }).then(	
+            this.loading = false,
+            this.disableButton = true)
+         .then(docRef => this.$router.push('trips'));
     },
   },
 };
@@ -145,14 +148,9 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
+  flex-direction: row;
 }
 
-.time {
-  margin-left: 4rem;
-}
-.time input {
-  width: 82%;
-}
 .buttons {
   display: inline-block;
   text-align: center;
