@@ -6,10 +6,10 @@
       </article>
       <nav>
         <ul class="navigation">
-          <li><router-link to="/profile" v-if="isLoggedIn"><span>{{currentUser}}</span></router-link></li>
+          <li v-if="isLoggedIn"><span>{{currentUser}}</span></li>
           <li><router-link to="/login" v-if="!isLoggedIn">Login</router-link></li>
           <li><router-link to="/register" v-if="!isLoggedIn">Register</router-link></li>
-          <li><router-link to="/trips" v-if="isLoggedIn">Travels</router-link></li>
+          <li><router-link to="/trips" v-if="isLoggedIn">Trips</router-link></li>
           <li><router-link to="/create" v-if="isLoggedIn">Add Trip</router-link></li>
           <li> <a @click="logout" class="nav-link" v-if="isLoggedIn">Logout</a></li>
         </ul>
@@ -38,8 +38,10 @@ export default {
      methods: {
        logout: function() {
          firebase.auth().signOut().then(() => {
+           this.$toastr.s("Success", "Successful Logout");
            this.$router.go({path: this.$router.path});
-         })
+          
+        })
        }
      }
 }

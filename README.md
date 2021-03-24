@@ -14,7 +14,6 @@
     Authorized user
   * User has access to trips page.
   * User has access to add trip page.
-  * User has access to his own profile page.
   * User DOES NOT have access to login page.
   * User DOES NOT have access to register page.
 
@@ -25,6 +24,4 @@
   * User can change the information about his own trips.
 * View all created trips
   * User can view different trips and join them.
-* Profile
-  * User can reset password.
-  * User can delete his created trips.
+

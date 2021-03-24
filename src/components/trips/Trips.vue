@@ -95,7 +95,7 @@ html {
  flex-wrap: wrap
 }
 .container {
-  width: 20rem;
+  width: 15rem;
   flex: 0 0 33.333333%;
   display: flex;
   flex-direction: column;
@@ -105,6 +105,7 @@ html {
 }
 #destination {
   font-size: 15px;
+  text-align: center;
 }
 input,
 label,
@@ -118,6 +119,7 @@ button {
   height: 90px;
   border-radius: 60px;
   text-align: center;
+  object-fit: cover;
 }
 .profile p {
   color: #32325d;

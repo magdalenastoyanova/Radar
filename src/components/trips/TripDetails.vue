@@ -36,7 +36,8 @@
           <button @click="deleteTrip" id="delete">Delete</button>
           </template>
           <template v-else>
-              <router-link to=""><button @click="joinTrip"  id="edit"> Join</button></router-link>
+              <button v-if="!isHidden" v-on:click="isHidden = true" id="edit"> Join</button>
+               <button v-if="isHidden" v-on:click="isHidden = false" id="edit"> Unjoin</button>
               <router-link to="/"><button id="delete"><a>Cancel</a></button></router-link>
           </template>
           
@@ -63,7 +64,10 @@ export default {
       phoneNumber: null,
       price: null,
       seats: null,
-      creator: null
+      creator: null,
+      loading: false,
+      isHidden: false,
+
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -127,6 +131,9 @@ export default {
         }
       },
       joinTrip() {
+
+            this.loading = false,
+           this.isActive=false
       
       }
   },
@@ -174,7 +181,6 @@ h1 {
 }
 .content {
   text-align: center;
-  margin-left: 2rem;
   color: #525f7f;
   font-family: "Helvetica", sans-serif;
 }
@@ -195,6 +201,7 @@ h1 {
 }
 #name {
   font-size: 20px;
+  text-align: center;
   margin-bottom: 10px;
   font-weight: bold;
 }
@@ -209,6 +216,7 @@ h1 {
 .buttons {
   display: flex;
   justify-content: center;
+  margin-left: 10px;
 }
 #edit {
   border: none;

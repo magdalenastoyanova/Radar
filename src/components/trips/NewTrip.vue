@@ -14,7 +14,7 @@
         <section class="date">
           <label>Date</label>
           <input
-            type="text"
+            type="date"
             id="date"
             v-model="date"
             placeholder="Pick a date"
@@ -24,7 +24,7 @@
         <section class="time">
           <label>Time</label>
           <input
-            type="text"
+            type="time"
             id="time"
             v-model="time"
             placeholder="10:30"
@@ -33,9 +33,9 @@
         </section>
       </article>
       <label for="seats">Seats Available</label>
-      <input type="text" v-model="seats" placeholder="3" required />
+      <input type="number" v-model="seats" placeholder="3" required />
       <label>Leva Per Person</label>
-      <input type="text" v-model="price" placeholder="20 leva" required />
+      <input type="number" v-model="price" placeholder="20 leva" required />
       <label for="carModel">Car Model</label>
       <input type="text" v-model="carModel" placeholder="Mazda 3" required />
       <label for="phoneNumber">Phone Number</label>
@@ -74,7 +74,6 @@ export default {
       seats: null,
       creator: null,
       loading: false,
-      disableButton: false,
     }
   },
   methods: {
@@ -94,7 +93,7 @@ export default {
         creator: firebase.auth().currentUser.uid
       }).then(	
             this.loading = false,
-            this.disableButton = true)
+          this.$toastr.s("Success", "Successfully added trip!"))
          .then(docRef => this.$router.push('trips'));
     },
   },
@@ -150,7 +149,15 @@ h1 {
   justify-content: start;
   flex-direction: row;
 }
-
+.dateTime input{
+  width: 100%;
+}
+.dateTime .time{
+  margin-left: 1rem;
+}
+.time input{
+  width: 133%;
+}
 .buttons {
   display: inline-block;
   text-align: center;

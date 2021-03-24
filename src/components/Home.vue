@@ -47,7 +47,7 @@ body{
   text-align: left;
   color: #5e72e4;
       position: relative;
-    top: 17rem;
+    top: 19.5rem;
     left: 67rem;
     transform: translate(-50%, -50%);
 }

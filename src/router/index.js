@@ -7,7 +7,6 @@ const TripDetails = () => import(/* webpackChunkName: "TripDetails" */ "@/compon
 const TripEdit = () => import(/* webpackChunkName: "TripEdit" */ "@/components/trips/TripEdit");
 const SignIn = () => import(/* webpackChunkName: "SignIn" */ "@/components/user/SignIn");
 const SignUp = () => import(/* webpackChunkName: "SignUp" */ "@/components/user/SignUp");
-const Profile = () => import(/* webpackChunkName: "Profile" */ "@/components/user/Profile");
 const Trips = () => import(/* webpackChunkName: "Trips" */ "@/components/trips/Trips");
 const NotFound = () => import(/* webpackChunkName: "NotFound" */ '@/components/common/NotFound');
 import firebase from 'firebase';
@@ -36,15 +35,6 @@ let router = new Router({
       component: SignUp,
       meta: {
         requiresGuest: true
-      }
-    },
-
-    {
-      path: "/profile",
-      name: "profile",
-      component: Profile,
-      meta: {
-        requiresAuth: true
       }
     },
 

@@ -90,6 +90,7 @@ export default {
         .then(
           (user) => {
             this.loading = false;
+            this.$toastr.s("Success", "Successful Registration!s");
             this.$router.go({ path: this.$router.path });
           },
           (err) => {

@@ -14,7 +14,7 @@
         <section class="date">
           <label for="date">Date</label>
           <input
-            type="text"
+            type="date"
             id="date"
             v-model="date"
             placeholder="Pick a date"
@@ -24,7 +24,7 @@
         <section class="time">
           <label for="time">Time</label>
           <input
-            type="text"
+            type="time"
             id="time"
             v-model="time"
             placeholder="10:30"
@@ -187,13 +187,17 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
+    flex-direction: row;
 }
 
-.time {
-  margin-left: 4rem;
+.dateTime input{
+  width: 100%;
 }
-.time input {
-  width: 82%;
+.dateTime .time{
+  margin-left: 1rem;
+}
+.time input{
+  width: 133%;
 }
 .buttons {
   display: inline-block;

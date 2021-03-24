@@ -64,6 +64,7 @@
 
 
 <script>
+
 import { validationMixin } from "vuelidate";
 import { required, email, minLength } from "vuelidate/lib/validators";
 import firebase from "firebase";
@@ -96,6 +97,7 @@ export default {
         .then(
           (user) => {
             this.loading = false;
+             this.$toastr.s("Success", "Successful Login");
             this.$router.go({ path: this.$router.path });
           },
           (err) => {
