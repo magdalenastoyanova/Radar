@@ -29,12 +29,13 @@ export default {
   background-color: #416475;
 }
 .error-container {
-  background-color: #416475;
+  background-color: #8898aa;
   text-align: center;
   font-size: 180px;
   font-family: "Catamaran", sans-serif;
   font-weight: 800;
   margin: 20px 15px;
+  box-shadow: 0px 0px 32px #8898AA26;
 }
 .error-container > span {
   display: inline-block;
@@ -188,7 +189,7 @@ h1 {
 a.more-link {
   text-transform: uppercase;
   font-size: 13px;
-  background-color: #92a4ad;
+  background-color: #8898aa;
   padding: 10px 15px;
   border-radius: 0;
   color: #92609e;
