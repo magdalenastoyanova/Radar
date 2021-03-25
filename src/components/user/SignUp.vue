@@ -26,8 +26,8 @@
 
     <template v-if="$v.password.$error">
         <p v-if="!$v.password.required" class="error">Password is required!</p>
-        <p v-else-if="!$v.password.minLength" class="error">Password should be atleast 3 symbols!</p>
-        <p v-else-if="!$v.password.maxLength" class="error">Password should be no more than 10 symbols!</p>
+        <p v-else-if="!$v.password.minLength" class="error">Password should be at least 6 symbols!</p>
+        <p v-else-if="!$v.password.maxLength" class="error">Password should be no more than 11 symbols!</p>
     </template>
 
             <article class="icon">
@@ -78,26 +78,37 @@ export default {
       maxLength: maxLength(11),
     },
       rePassword: {
-      sameAs: sameAs("password")
+        required,
+        sameAs: sameAs("password")
     }
   },
   methods: {
     register: async function (e) {
-      this.loading = true;
+          if(!this.rePassword){
+            this.email = '';
+						this.password = '';
+						this.rePassword = '';
+				   	this.$toastr.e("Error", "Confirm your password!");
+             return;
+          }
+       this.loading = true;
        await firebase
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(
           (user) => {
             this.loading = false;
-            this.$toastr.s("Success", "Successful Registration!s");
+            this.$toastr.s("Success", "Successful Registration!");
             this.$router.go({ path: this.$router.path });
-          },
+          }).catch(
           (err) => {
             this.loading = false;
-            alert(err.message);
+						this.email = '';
+						this.password = '';
+						this.rePassword = '';
+          
           }
-        );
+        )
     },
   },
 };
