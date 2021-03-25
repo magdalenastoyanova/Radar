@@ -191,7 +191,7 @@ a.more-link {
   background-color: #92a4ad;
   padding: 10px 15px;
   border-radius: 0;
-  color: #d1f2a5;
+  color: #92609e;
   display: inline-block;
   margin-right: 5px;
   margin-bottom: 5px;

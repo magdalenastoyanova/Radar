@@ -103,10 +103,6 @@ export default {
           }).catch(
           (err) => {
             this.loading = false;
-						this.email = '';
-						this.password = '';
-						this.rePassword = '';
-          
           }
         )
     },
