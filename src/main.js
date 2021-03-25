@@ -10,6 +10,7 @@ Vue.config.productionTip = false
 Vue.use(VueToastr, {
 	defaultTimeout: 3000,
 	defaultPosition: 'toast-top-center',
+  maxOpened: 1
 });
 
 let app;

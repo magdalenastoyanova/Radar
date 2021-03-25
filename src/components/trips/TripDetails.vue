@@ -174,10 +174,13 @@ h1 {
   display: flex;
   align-items: center;
   box-shadow: 0px 0px 32px #8898aa26;
-  border-radius: 6px;
+  border-radius: 10px;
 }
 .profile-img img {
   width: 300px;
+  height: 50vh;
+  object-fit: cover;
+  margin-left: 0;
 }
 .content {
   text-align: center;
