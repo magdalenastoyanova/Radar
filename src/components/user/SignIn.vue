@@ -119,7 +119,7 @@ export default {
   display: flex;
   flex-direction: column;
   padding: auto;
-  box-shadow: -1px 1px 34px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 32px #8898AA26;
   box-sizing: border-box;
   border-radius: 7px;
 }

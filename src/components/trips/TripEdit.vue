@@ -5,7 +5,7 @@
        <label for="name"> Name</label>
       <input type="text" v-model="name" required placeholder="Your Name" disabled />
        <label for="imageUrl">Your Photo</label>
-      <input type="text" v-model="imageUrl" required placeholder="http://..."/>
+      <input type="text" v-model="imageUrl" required placeholder="http://..." disabled />
       <label for="cityFrom">You Travel from(City)</label>
       <input type="text" v-model="cityFrom" required placeholder="City" />
       <label for="cityTo">You Travel to(City)</label>
@@ -151,7 +151,7 @@ form {
   display: flex;
   flex-direction: column;
   padding: auto;
-  box-shadow: -1px 1px 34px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 32px #8898AA26;
   box-sizing: border-box;
   border-radius: 7px;
 }

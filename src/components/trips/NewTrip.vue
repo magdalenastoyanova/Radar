@@ -48,7 +48,7 @@
     </article>
     <article class="buttons">
       <router-link to="/"><button class="cancel"><a>Cancel</a></button></router-link>
-      <button type="submit" id="create"   :disabled="disableButton"><a>Create</a></button>
+      <button type="submit" id="create"><a>Create</a></button>
     </article>
   </form>
 </template>
@@ -111,7 +111,7 @@ form {
   display: flex;
   flex-direction: column;
   padding: auto;
-  box-shadow: -1px 1px 34px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 32px #8898AA26;
   box-sizing: border-box;
   border-radius: 7px;
 }
