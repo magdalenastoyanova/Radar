@@ -8,7 +8,7 @@
       <input type="text" v-model="imageUrl" required placeholder="http://..." />
       <label for="cityFrom">You Travel from(City)</label>
       <input type="text" v-model="cityFrom" required placeholder="City" />
-      <label for="cityTo">You Travel from(City)</label>
+      <label for="cityTo">You Travel to(City)</label>
       <input type="text" v-model="cityTo" placeholder="City" required />
       <article class="dateTime">
         <section class="date">

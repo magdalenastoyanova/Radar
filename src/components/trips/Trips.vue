@@ -120,6 +120,7 @@ button {
   border-radius: 60px;
   text-align: center;
   object-fit: cover;
+  margin-left: 1rem;
 }
 .profile p {
   color: #32325d;

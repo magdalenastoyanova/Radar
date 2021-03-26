@@ -125,6 +125,7 @@ export default {
           .then((querySnapShot) => {
             querySnapShot.forEach((doc) => {
               doc.ref.delete();
+              this.$toastr.s("Success", "Successfully Deleted Trip!");
               this.$router.push("/");
             })
           })
