@@ -1,13 +1,12 @@
 <template>
   <body>
     <section class="content">
-      <article
-        class="background-img"></article>
+      <article class="background-img"></article>
       <article class="content-inside">
         <section class="text">
           <h2>Share a Journey</h2>
           <p>The Ultimate Platform for Shared travel</p>
-          <br/>
+          <br />
           <p>expenses &amp; Great company</p>
         </section>
         <section class="btn">
@@ -28,10 +27,10 @@
 <script>
 export default {
   name: "Home",
-}
+};
 </script>
 <style scoped>
-body{
+body {
   background-image: url(./images/illustration.png);
   background-size: cover;
   opacity: 0.9;
@@ -46,10 +45,10 @@ body{
 .content {
   text-align: left;
   color: #5e72e4;
-      position: relative;
-    top: 19.5rem;
-    left: 67rem;
-    transform: translate(-50%, -50%);
+  position: relative;
+  top: 19.5rem;
+  left: 67rem;
+  transform: translate(-50%, -50%);
 }
 .content-inside {
   margin: 0;
@@ -82,10 +81,10 @@ body{
 
 .benefits {
   display: flex;
- justify-content: center;
- position: absolute;
- top: 15rem;
- left: 4rem;;
+  justify-content: center;
+  position: absolute;
+  top: 15rem;
+  left: 4rem;
 }
 .benefits p {
   display: flex;
@@ -95,5 +94,14 @@ body{
   align-items: start;
   margin: 0;
   padding: 20px;
+}
+@media all and (max-width: 600px) {
+  body {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+  }
 }
 </style>

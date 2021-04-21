@@ -249,4 +249,17 @@ h1 {
   background: white;
   color: #5e72e4;
 }
+@media all and (max-width: 600px) {
+  .container{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    align-content: center;
+        margin-left: -1rem;
+        margin-top: 1rem;
+  }
+  h1{
+    margin-left: -6rem;
+  }
+}
 </style>

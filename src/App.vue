@@ -164,6 +164,11 @@ export default {
 .spinner-message {
 	text-align: center;
 }
+@media all and (max-width: 600px) {
+  #app{
+display: 80%
+  }
+}
 </style>
 
 

@@ -34,6 +34,11 @@ p {
   margin: 0px 10px;
   color: #525F7F;
 }
-
+@media all and (max-width: 600px) {
+  footer p {
+    display: flex;
+    flex-direction: column;
+  }
+}
 
 </style>

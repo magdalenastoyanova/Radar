@@ -79,4 +79,15 @@ export default {
 .navigation li a:hover {
   color: #5e72e4;
 }
+@media all and (max-width: 600px) {
+#app > header > article > nav > ul{
+  margin-left: -5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+}
 </style>
+
+
+  

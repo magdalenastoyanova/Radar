@@ -211,4 +211,13 @@ p.error {
 input.error {
   border-left-color: #a8413f;
 }
+@media all and (max-width: 600px){
+  #app > form > article.fields > article > section.time{
+    margin-left: 0;
+    width: 68%;
+  }
+ #app > form > article.fields > article > section.date{
+     width: 90%;
+  }
+}
 </style>

@@ -149,7 +149,6 @@ h1 {
   width: 300px;
   font-family: FontAwesome;
   background-color: #ffffff;
-
   margin: 10px;
   padding: 7px;
   border: none;
@@ -183,8 +182,33 @@ p.error {
   padding: 8px;
   border-radius: 3px;
 }
-
 input.error {
   border-left-color: #a8413f;
+}
+@media all and (max-width: 600px){
+  .login-form{
+    width: 70%;
+  }
+  .fields input{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+  .icon{
+    display: flex;
+  }
+  .icon i {
+    margin-top: 10px;
+  }
+  #login > div > div.login-form > form > article > article:nth-child(1){
+margin-left: -3rem;
+  }
+    #login > div > div.login-form > form > article > article:nth-child(2){
+margin-left: -3rem;
+  }
+  #login > div > div.login-form > form > button{
+    margin-left: 7rem;
+  }
 }
 </style>
