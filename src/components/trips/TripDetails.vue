@@ -186,7 +186,7 @@ h1 {
 .content {
   text-align: center;
   color: #525f7f;
-  font-family: "Helvetica", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 .dark {
   color: #172b4d;

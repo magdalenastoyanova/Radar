@@ -84,7 +84,7 @@ export default {
 html {
   background-color: #f4f5f7;
   box-sizing: border-box;
-  font-family: Helvetica, sans-serif;
+ font-family: 'Open Sans', sans-serif;
    width: 80%;
   overflow-x: hidden;
   overflow-y: hidden;

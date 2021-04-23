@@ -75,7 +75,7 @@ body {
 .btn button a {
   text-decoration: none;
   color: #ffffff;
-  font-family: Helvetica, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   padding: 10px 13px;
 }
 
@@ -88,7 +88,7 @@ body {
 }
 .benefits p {
   display: flex;
-  font-family: Arial, Helvetica, sans-serif, sans-serif;
+ font-family: 'Open Sans', sans-serif;
   font-size: 15px;
   font-weight: bold;
   align-items: start;

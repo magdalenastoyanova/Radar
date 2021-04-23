@@ -170,7 +170,7 @@ button,
 input,
 select,
 textarea {
-  font-family: "Montserrat", Helvetica, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #92a4ad;
 }
 h1 {

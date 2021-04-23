@@ -66,7 +66,7 @@ export default {
   color: #172b4d;
   text-align: center;
   text-decoration: none;
-  font: bold 13px Helvetica, sans-serif;
+  font: bold 13px 'Open Sans', sans-serif;
   line-height: 1.2;
   padding: 0 1rem;
 }

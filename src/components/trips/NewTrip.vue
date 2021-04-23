@@ -117,7 +117,7 @@ form {
 }
 h1 {
   display: block;
-  font-family: Helvetica, sans-serif;
+ font-family: 'Open Sans', sans-serif;
   text-align: center;
   color: #32325d;
   font-weight: bold;
@@ -136,7 +136,7 @@ h1 {
   border-radius: 4px;
 }
 .fields label {
-  font-family: Helvetica, sans-serif;
+ font-family: 'Open Sans', sans-serif;
   text-align: left;
   color: #525f7f;
   font-size: 13px;
@@ -165,7 +165,7 @@ h1 {
 }
 button {
   padding: 5px 36px;
-  font-family: Helvetica, sans-serif;
+ font-family: 'Open Sans', sans-serif;
   border: 2px solid #5e72e4;
   box-shadow: 0px 4px 6px #32325d1c;
   border-radius: 4px;

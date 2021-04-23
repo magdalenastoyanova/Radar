@@ -114,7 +114,7 @@ export default {
 #register {
   margin: 0;
   padding: 0;
-  font-family: Helvetica, sans-serif;
+font-family: 'Open Sans', sans-serif;
   box-sizing: border-box;
 }
 .register-form {
@@ -141,7 +141,7 @@ export default {
 
 h1 {
   display: block;
-  font-family: Helvetica, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   text-align: center;
   color: #8898aa;
   font-size: 15px;
@@ -173,7 +173,7 @@ h1 {
   margin-left: 10px;
 }
 button {
-  font-family: Helvetica, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   background-color: #5e72e4;
   color: #ffffff;
   border: none;
